@@ -108,7 +108,6 @@ public:
 int main() {
     LinkedList list;
 
-    // Build list using insertAtBeginning
     cout << "Forward List:" << endl;
     list.insertAtBeginning(5);
     list.insertAtBeginning(4);
@@ -117,22 +116,18 @@ int main() {
     list.insertAtBeginning(1);
     list.display();
 
-    // Delete first item
     cout << "Deleting the first node:" << endl;
     list.deleteFirst();
     list.display();
 
-    // Delete last item
     cout << "Deleting the last node:" << endl;
     list.deleteLast();
     list.display();
 
-    // Delete an interior item
     cout << "Deleting the middle node:" << endl;
     list.deleteInterior(3);
     list.display();
 
-    // Repeat with insertAtEnd
     LinkedList list2;
     cout << "Backward list:" << endl;
     list2.insertAtEnd(5);
@@ -141,18 +136,15 @@ int main() {
     list2.insertAtEnd(2);
     list2.insertAtEnd(1);
     list2.display();
-
-    // Delete first item
+    
     cout << "Deleting the first node:" << endl;
     list2.deleteFirst();
     list2.display();
 
-    // Delete last item
     cout << "Deleting the last node:" << endl;
     list2.deleteLast();
     list2.display();
 
-    // Delete an interior item
     cout << "Deleting the middle node:" << endl;
     list2.deleteInterior(3);
     list2.display();
