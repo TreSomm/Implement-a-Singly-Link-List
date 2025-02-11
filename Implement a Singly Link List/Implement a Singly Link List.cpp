@@ -8,20 +8,23 @@ struct Node {
     Node(int value) : data(value), next(nullptr) {}
 };
 
-class LinkedList {
-private:
+class SinglyLinkedList {
+protected:
     Node* head;
     Node* tail;
+    int count;
 
 public:
-    LinkedList() : head(nullptr), tail(nullptr) {}
+    SinglyLinkedList() : head(nullptr), tail(nullptr), count(0) {}
 
-    ~LinkedList() {
+    ~SinglyLinkedList() {
         while (head) {
             Node* temp = head;
             head = head->next;
             delete temp;
         }
+        tail = nullptr;
+        count = 0;
     }
 
     void insertAtBeginning(int value) {
@@ -33,6 +36,7 @@ public:
             newNode->next = head;
             head = newNode;
         }
+        count++;
     }
 
     void insertAtEnd(int value) {
@@ -44,6 +48,7 @@ public:
             tail->next = newNode;
             tail = newNode;
         }
+        count++;
     }
 
     void deleteFirst() {
@@ -53,6 +58,7 @@ public:
         head = head->next;
         if (!head) tail = nullptr;
         delete temp;
+        count--;
     }
 
     void deleteLast() {
@@ -61,6 +67,7 @@ public:
         if (head == tail) {
             delete head;
             head = tail = nullptr;
+            count--;
             return;
         }
 
@@ -72,6 +79,7 @@ public:
         delete tail;
         tail = current;
         tail->next = nullptr;
+        count--;
     }
 
     void deleteInterior(int value) {
@@ -92,6 +100,7 @@ public:
             current->next = temp->next;
             if (temp == tail) tail = current;
             delete temp;
+            count--;
         }
     }
 
@@ -103,51 +112,37 @@ public:
         }
         cout << "nullptr" << endl;
     }
+
+    int size() const {
+        return count;
+    }
+
+private:
+    void reversePrint(Node* node) const {
+        if (!node) return;
+        reversePrint(node->next);
+        cout << node->data << " -> ";
+    }
+
+public:
+    void reversePrint() const {
+        reversePrint(head);
+        cout << "nullptr" << endl;
+    }
 };
 
 int main() {
-    LinkedList list;
+    SinglyLinkedList list;
 
-    cout << "Forward List:" << endl;
-    list.insertAtBeginning(5);
-    list.insertAtBeginning(4);
-    list.insertAtBeginning(3);
-    list.insertAtBeginning(2);
-    list.insertAtBeginning(1);
+    for (int i = 1; i <= 10; ++i) {
+        list.insertAtEnd(i);
+    }
+
+    cout << "List in regular order:" << endl;
     list.display();
 
-    cout << "Deleting the first node:" << endl;
-    list.deleteFirst();
-    list.display();
-
-    cout << "Deleting the last node:" << endl;
-    list.deleteLast();
-    list.display();
-
-    cout << "Deleting the middle node:" << endl;
-    list.deleteInterior(3);
-    list.display();
-
-    LinkedList list2;
-    cout << "Backward list:" << endl;
-    list2.insertAtEnd(5);
-    list2.insertAtEnd(4);
-    list2.insertAtEnd(3);
-    list2.insertAtEnd(2);
-    list2.insertAtEnd(1);
-    list2.display();
-
-    cout << "Deleting the first node:" << endl;
-    list2.deleteFirst();
-    list2.display();
-
-    cout << "Deleting the last node:" << endl;
-    list2.deleteLast();
-    list2.display();
-
-    cout << "Deleting the middle node:" << endl;
-    list2.deleteInterior(3);
-    list2.display();
+    cout << "List in reverse order:" << endl;
+    list.reversePrint();
 
     return 0;
 }
