@@ -110,7 +110,7 @@ public:
             cout << current->data << " -> ";
             current = current->next;
         }
-        cout << "NULL" << endl;
+        cout << "nullptr" << endl;
     }
 
     int size() const {
@@ -143,6 +143,12 @@ int main() {
     list.insertAtEnd(3);
     list.insertAtEnd(4);
     list.insertAtEnd(5);
+    list.insertAtEnd(5);
+    list.insertAtEnd(6);
+    list.insertAtEnd(7);
+    list.insertAtEnd(8);
+    list.insertAtEnd(9);
+    list.insertAtEnd(10);
 
     cout << "Original list:" << endl;
     list.display();
